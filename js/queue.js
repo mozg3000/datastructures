@@ -1,6 +1,6 @@
-import Stack from './stack.js';
+const Stack = require('./stack.js');
 
-export default class Queue extends Stack{
+module.exports = class Queue extends Stack{
 	constructor(value){
 		super(value);
 	}
@@ -8,11 +8,11 @@ export default class Queue extends Stack{
 	push(value){
 		let head = this.head;
 		if(head){
-			let newNode = new Node(value);
+			let newNode = new this.Node(value);
 			newNode.next = this.head;
 			this.head = newNode;
 		}else{
-			this.head = new Node(value);
+			this.head = new this.Node(value);
 		}
 			return 1;
 	}

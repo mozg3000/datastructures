@@ -1,0 +1,22 @@
+{
+  "name": "@mozg3000/datastructures",
+  "version": "0.0.1",
+  "description": "Common data structures",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mozg3000/datastructures.git"
+  },
+  "keywords": [
+    "data structures"
+  ],
+  "author": "Mozg3000 (Igor Lukoshnikov)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mozg3000/datastructures/issues"
+  },
+  "homepage": "https://github.com/mozg3000/datastructures#readme"
+}

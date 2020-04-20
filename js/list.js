@@ -1,6 +1,6 @@
-import Stack from './stack.js';
+const Stack = require('./stack.js');
 
-export default class List extends Stack{
+module.exports = class List extends Stack{
 	constructor(value){
 		super(value);
 	}
@@ -24,7 +24,7 @@ export default class List extends Stack{
 			this.head = list.head;
 		}
 	}
-	// Deletes Node containing value from list 
+	// Deletes this.Node containing value from list 
 	remove(value, comparator = (a, b) => a===b){
 		if(comparator(this.head.value, value)){
 			this.head = this.head.next;
@@ -39,7 +39,7 @@ export default class List extends Stack{
 			}
 		}
 	}
-	// Returns node before but one the value
+	// Returns this.Node before but one the value
 	getOneNodeBefore (value, comparator) {
 		let pointer = this.head,
 			prev = this.head,
@@ -59,10 +59,10 @@ export default class List extends Stack{
 		}
 		return found ? prev : null;
 	}
-	// Insert Node in the certain position or to the end if index greate of the collection length
+	// Insert this.Node in the certain position or to the end if index greate of the collection length
 	insert (value, index) {
 		if(index === 0) {
-			let newNode = new Node(value);
+			let newNode = new this.Node(value);
 			newNode.next = this.head;
 			this.head = newNode;
 			
@@ -74,18 +74,18 @@ export default class List extends Stack{
 		for (i = 0; i !== index && pointer; prev = pointer, pointer = pointer.next, i++) {
 			continue;
 		}
-		prev.next = new Node(value);
+		prev.next = new this.Node(value);
 		prev.next.next = pointer;
 		return 1;
 	}
-	// Adds Node to the head of the list
+	// Adds this.Node to the head of the list
 	unshift (value) {
-		let newHead = new Node(value);
+		let newHead = new this.Node(value);
 		newHead.next = this.head;
 		this.head = newHead;
 		return 1;
 	}
-	// Takes off the first node and returns its value
+	// Takes off the first this.Node and returns its value
 	shift () {
 		let value = this.head.value;
 		this.head = this.head.next;

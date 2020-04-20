@@ -1,14 +1,14 @@
-export default class Stack {
+module.exports = class Stack {
 	constructor(value) {
-		Node = class {
+		this.Node = class {
 			constructor(invalue){
 				this.value = invalue;
 				this.next = null;
 			}
 		}
-		this.head = value ? new Node(value) : null;
+		this.head = value ? new this.Node(value) : null;
 	}
-	// Takes off last node and returns value
+	// Takes off last this.Node and returns value
 	pop() {
 		let value = null;
 		if(this.head){
@@ -22,23 +22,23 @@ export default class Stack {
 		}
 		return value;
 	}
-	// Adds Node to collection
+	// Adds this.Node to collection
 	push(value){
 		if(!this.head){
-			this.head = new Node(value);
+			this.head = new this.Node(value);
 		}else{
 			this.append(value);
 		}
 		return 1;
 	}
 	append(value){
-		this.findNodeToPush().next = new Node(value);
+		this.findNodeToPush().next = new this.Node(value);
 	}
 	// Method to be use in inheritors clases to push nodes to the end
 	findNodeToPush(value){
 		return this.getLastNode();
 	}
-	// Returns last Node of the collection
+	// Returns last this.Node of the collection
 	getLastNode(){
 		let pointer = this.head;
 		for(; pointer.next; pointer = pointer.next){
@@ -46,7 +46,7 @@ export default class Stack {
 		}
 		return pointer;
 	}
-	// Returns last but one Node
+	// Returns last but one this.Node
 	getLastButOneNode() {
 		let pointer = this.head,
 			prev = this.head;

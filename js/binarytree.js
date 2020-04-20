@@ -1,10 +1,10 @@
-// import Node from './Node';
-import List from './list.js';
+// import this.Node from './this.Node';
+const List = require('./list.js');
 // BinaryTree with only unique values
-export default class BinaryTree extends List{
+module.exports = class BinaryTree extends List{
 	constructor(value = null) {
 		super(value);
-		Node = class extends Node{
+		this.Node = class extends this.Node{
 			constructor(value){
 				super(value);
 				this.prev = null;
@@ -12,7 +12,7 @@ export default class BinaryTree extends List{
 			
 		} 
 		if(value){
-			this.head = new Node(value);
+			this.head = new this.Node(value);
 		}else{
 			this.head = null;
 		}
@@ -40,9 +40,9 @@ export default class BinaryTree extends List{
 		}
 		return;
 	}
-	// Adds Node to the collection in sorted order
+	// Adds this.Node to the collection in sorted order
 	push(value){
-		let newNode	= new Node(value);
+		let newNode	= new this.Node(value);
 		if(this.head){
 			let targetNode = this.getLastNode(value);
 			if(targetNode.value < value){
@@ -56,7 +56,7 @@ export default class BinaryTree extends List{
 		
 		return 1;
 	}
-	// Return Node the current value to be concatinated
+	// Return this.Node the current value to be concatinated
 	getLastNode(value){
 		if(this.head){
 			let pointer, prevNode;
@@ -74,15 +74,15 @@ export default class BinaryTree extends List{
 		}
 	}
 	// Recursivly makes ordered list from Nodes
-	getSortedNode(node){
+	getSortedNode(Node){
 		let list = new List();
-		if(node.prev){
-			let sublist = this.getSortedNode(node.prev);
+		if(this.Node.prev){
+			let sublist = this.getSortedNode(Node.prev);
 			list.concat(sublist);
 		}
-		list.push(node.value);
-		if(node.next){
-			let sublist = this.getSortedNode(node.next);
+		list.push(this.Node.value);
+		if(this.Node.next){
+			let sublist = this.getSortedNode(Node.next);
 			list.concat(sublist);
 		}
 		return list;
