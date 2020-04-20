@@ -27,7 +27,7 @@ module.exports = class Stack {
 		if(!this.head){
 			this.head = new this.Node(value);
 		}else{
-			this.append(value);
+			this.getLastNode().next = new this.Node(value);
 		}
 		return 1;
 	}
