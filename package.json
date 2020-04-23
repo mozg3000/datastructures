@@ -4,7 +4,7 @@
   "description": "Common data structures",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "cls && jasmine"
   },
   "repository": {
     "type": "git",
@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/mozg3000/datastructures/issues"
   },
-  "homepage": "https://github.com/mozg3000/datastructures#readme"
+  "homepage": "https://github.com/mozg3000/datastructures#readme",
+  "devDependencies": {
+    "jasmin": "0.0.2"
+  }
 }

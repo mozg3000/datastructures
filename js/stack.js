@@ -13,8 +13,9 @@ module.exports = class Stack {
 		let value = null;
 		if(this.head){
 			if(this.head.next){
-				let prev = this.getLastButOneNode(),
-					value = prev.next.value;
+				let prev = this.getLastButOneNode();
+				value = prev.next.value;
+				prev.next = null;
 			}else{
 				value = this.head.value;
 				this.head = null;
@@ -22,21 +23,24 @@ module.exports = class Stack {
 		}
 		return value;
 	}
-	// Adds this.Node to collection
+	// Adds this.Node to the head of the collection
+	// push(value){
+		// if(!this.head){
+			// this.head = new this.Node(value);
+		// }else{
+			// this.append
+		// }
+	// }
 	push(value){
 		if(!this.head){
 			this.head = new this.Node(value);
 		}else{
-			this.getLastNode().next = new this.Node(value);
+			this.append(value);
 		}
 		return 1;
 	}
 	append(value){
-		this.findNodeToPush().next = new this.Node(value);
-	}
-	// Method to be use in inheritors clases to push nodes to the end
-	findNodeToPush(value){
-		return this.getLastNode();
+		this.getLastNode().next = new this.Node(value);
 	}
 	// Returns last this.Node of the collection
 	getLastNode(){

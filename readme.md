@@ -20,15 +20,15 @@ This is just a common data structures which I code in every programming language
 ##### public methods
 Method | Description
 ------ | -----------
+**isEmpty()**| returns is the stack empty or not.
 **length()** | calculates and return length of the stack.
 **pop()**	 | returns last element and delete it from the stack.
 **print()**	 | outputs the stack in console.
-**push()**	 | adds new element to thr stack.
+**push()**	 | adds new element to the stack.
 
 ##### private methods
 Method | Description
 ------ | -----------
 **append()** 			| adds new element to the end of the structure.
-**isEmpty()** 			| returns is the stack empty or not.
 **getLastButOneNode()** | returns last but one Node of the structure.
 **getLastNode()** 		| returns last Node of the structure.
