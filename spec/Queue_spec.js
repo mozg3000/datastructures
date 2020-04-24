@@ -10,6 +10,8 @@ describe("Queue", function(){
 		queue.push(2);
 		expect(queue.isEmpty()).toBe(false);
 		queue.push(3);
+		// console.log(queue);
+		// queue.print();
 		expect(queue.isEmpty()).toBe(false);
 		expect(queue.pop()).toEqual(1);
 		expect(queue.isEmpty()).toBe(false);
@@ -25,6 +27,8 @@ describe("Queue", function(){
 	});
 	it("initialized in constructor", function(){
 		const queue = new Queue(7);
+		// console.log(queue);
+		// queue.print();
 		expect(queue.isEmpty()).toBe(false);
 		queue.push(6);
 		expect(queue.isEmpty()).toBe(false);

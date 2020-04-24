@@ -4,7 +4,7 @@
   "description": "Common data structures",
   "main": "index.js",
   "scripts": {
-    "test": "cls && jasmine"
+    "test": "cls && jasmine spec/List_spec.js"
   },
   "repository": {
     "type": "git",

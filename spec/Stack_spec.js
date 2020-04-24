@@ -11,6 +11,8 @@ describe("Stack", function(){
 		expect(stack.isEmpty()).toBe(false);
 		stack.push(3);
 		expect(stack.isEmpty()).toBe(false);
+		// stack.print();
+		// console.log(stack);
 		expect(stack.pop()).toEqual(3);
 		expect(stack.isEmpty()).toBe(false);
 		expect(stack.pop()).toEqual(2);

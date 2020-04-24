@@ -1,9 +1,10 @@
 module.exports = class Stack {
 	constructor(value) {
 		this.Node = class {
-			constructor(invalue){
-				this.value = invalue;
+			constructor(value){
+				this.value = value;
 				this.next = null;
+				// this.prev = prev;
 			}
 		}
 		this.head = value ? new this.Node(value) : null;
@@ -11,65 +12,29 @@ module.exports = class Stack {
 	// Takes off last this.Node and returns value
 	pop() {
 		let value = null;
-		if(this.head){
-			if(this.head.next){
-				let prev = this.getLastButOneNode();
-				value = prev.next.value;
-				prev.next = null;
-			}else{
-				value = this.head.value;
-				this.head = null;
-			}
+		if(!this.isEmpty()){
+			value = this.head.value;
+			this.head = this.head.next;
 		}
 		return value;
 	}
 	// Adds this.Node to the head of the collection
-	// push(value){
-		// if(!this.head){
-			// this.head = new this.Node(value);
-		// }else{
-			// this.append
-		// }
-	// }
 	push(value){
-		if(!this.head){
-			this.head = new this.Node(value);
+		if(this.isEmpty()){
+			this._addHead(value);
 		}else{
-			this.append(value);
+			this._prepend(value);
 		}
 		return 1;
 	}
-	append(value){
-		this.getLastNode().next = new this.Node(value);
+	_prepend(value){
+		const tmp = this.head;
+		this.head = new this.Node(value);
+		this.head.next = tmp;
 	}
-	// Returns last this.Node of the collection
-	getLastNode(){
-		let pointer = this.head;
-		for(; pointer.next; pointer = pointer.next){
-			continue;
-		}
-		return pointer;
+	_addHead(value){
+		this.head = new this.Node(value);
 	}
-	// Returns last but one this.Node
-	getLastButOneNode() {
-		let pointer = this.head,
-			prev = this.head;
-		for(;pointer.next; prev = pointer, pointer = pointer.next) {
-			continue;
-		}
-		return prev;
-	}
-	// Find out length of the collection
-	// length(){
-		// let count = 0;
-		// if(this.head){
-			// count++;
-			// for(let pointer = this.head; pointer.next; pointer = pointer.next){
-				// count++;
-			// }
-		// }
-		// return count;
-	// }
 	// Return true if collection empty
 	isEmpty(){
 		return this.head === null;
