@@ -15,6 +15,17 @@ module.exports = class List extends Stack{
 
 		return false;
 	}
+	// Find out length of the collection
+	length(){
+		let count = 0;
+		if(this.head){
+			count++;
+			for(let pointer = this.head; pointer.next; pointer = pointer.next){
+				count++;
+			}
+		}
+		return count;
+	}
 	// Concatinate two (sub)list
 	concat(list){
 		if(this.head){
@@ -26,17 +37,21 @@ module.exports = class List extends Stack{
 	}
 	// Deletes this.Node containing value from list 
 	remove(value, comparator = (a, b) => a===b){
-		if(comparator(this.head.value, value)){
-			this.head = this.head.next;
-			return 1;
-		}else{
-			let prev = this.getOneNodeBefore(value, comparator);
-			if(prev){
-				prev.next = prev.next.next;
+		if(this.head){
+			if(comparator(this.head.value, value)){
+				this.head = this.head.next;
 				return 1;
 			}else{
-				return 0;
+				let prev = this.getOneNodeBefore(value, comparator);
+				if(prev){
+					prev.next = prev.next.next;
+					return 1;
+				}else{
+					return 0;
+				}
 			}
+		}else{
+			return 0;
 		}
 	}
 	// Returns this.Node before but one the value
@@ -61,21 +76,25 @@ module.exports = class List extends Stack{
 	}
 	// Insert this.Node in the certain position or to the end if index greate of the collection length
 	insert (value, index) {
-		if(index === 0) {
-			let newNode = new this.Node(value);
-			newNode.next = this.head;
-			this.head = newNode;
-			
-			return 1;
-		}
-		let pointer = this.head,
-			prev = this.head,
-			i = 0;
-		for (i = 0; i !== index && pointer; prev = pointer, pointer = pointer.next, i++) {
-			continue;
-		}
-		prev.next = new this.Node(value);
-		prev.next.next = pointer;
+		if(this.isEmpty()){
+			this.head = new this.Node(value);
+		}else{
+			if(index === 0) {
+				let newNode = new this.Node(value);
+				newNode.next = this.head;
+				this.head = newNode;
+				
+				return 1;
+			}
+			let pointer = this.head,
+				prev = this.head,
+				i = 0;
+			for (i = 0; i !== index && pointer; prev = pointer, pointer = pointer.next, i++) {
+				continue;
+			}
+			prev.next = new this.Node(value);
+			prev.next.next = pointer;
+			}
 		return 1;
 	}
 	// Adds this.Node to the head of the list
@@ -87,8 +106,12 @@ module.exports = class List extends Stack{
 	}
 	// Takes off the first this.Node and returns its value
 	shift () {
-		let value = this.head.value;
-		this.head = this.head.next;
+		let value = null;
+		
+		if(this.head){
+			value = this.head.value;
+			this.head = this.head.next;
+		}
 		
 		return value;
 	}
@@ -113,9 +136,9 @@ module.exports = class List extends Stack{
 				if(current.next){
 					current = current.next;
 					return {
-							  done: false,
-							  value: current.value
-							}
+						done: false,
+						value: current.value
+					}
 				}else{
 					return {
 						done: true

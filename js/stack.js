@@ -60,16 +60,16 @@ module.exports = class Stack {
 		return prev;
 	}
 	// Find out length of the collection
-	length(){
-		let count = 0;
-		if(this.head){
-			count++;
-			for(let pointer = this.head; pointer.next; pointer = pointer.next){
-				count++;
-			}
-		}
-		return count;
-	}
+	// length(){
+		// let count = 0;
+		// if(this.head){
+			// count++;
+			// for(let pointer = this.head; pointer.next; pointer = pointer.next){
+				// count++;
+			// }
+		// }
+		// return count;
+	// }
 	// Return true if collection empty
 	isEmpty(){
 		return this.head === null;
