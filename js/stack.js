@@ -40,16 +40,16 @@ module.exports = class Stack {
 		return this.head === null;
 	}
 	// Prints collection to the console.log
-	print(){
-		if(this.head){
-			let pointer = this.head;
-			while(pointer.next){
-				console.log(pointer.value);
-				pointer = pointer.next;
-			}
-			console.log(pointer.value);
-		} else {
-			console.log('Empty Collection');
-		}
-	}
+	// print(){
+		// if(this.head){
+			// let pointer = this.head;
+			// while(pointer.next){
+				// console.log(pointer.value);
+				// pointer = pointer.next;
+			// }
+			// console.log(pointer.value);
+		// } else {
+			// console.log('Empty Collection');
+		// }
+	// }
 }
