@@ -5,22 +5,23 @@
 
 This is just a common data structures which I code in every programming language I learn.
 
-[Source code on github](https://github.com/mozg3000/datastructures)
-[npm repository](http://)
+###### [Source code on github](https://github.com/mozg3000/datastructures)
 
-To install from npm repository:
+###### [npm repository](http://)
+
+#### To install from npm repository:
 
 ```
 npm install @mozg3000/datastructures --registry http://iluka.ru:4873
 ```
 
-To use in project;
+#### To use in project;
 
 ```
 import {Stack, Queue, List} from '@mozg3000/datastructures';
 ```
 
-To run tests:
+#### To run tests:
 
 ```
 npm run test
