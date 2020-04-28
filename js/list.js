@@ -1,9 +1,6 @@
-const Stack = require('./stack.js');
+const Queue = require('./queue.js');
 
-module.exports = class List extends Stack{
-	constructor(value){
-		super(value);
-	}
+module.exports = class List extends Queue{
 	// Looking for the value in collection and return true if it was fount or false else.
 	includes(value, comparator = (a, b) => a===b){
 		
@@ -15,96 +12,136 @@ module.exports = class List extends Stack{
 
 		return false;
 	}
+	// Find out length of the collection
+	length(){
+		let count = 0;
+		if(this.head){
+			count++;
+			for(let pointer = this.head; pointer.next; pointer = pointer.next){
+				count++;
+			}
+		}
+		return count;
+	}
 	// Concatinate two (sub)list
 	concat(list){
 		if(this.head){
-			let pointer = this.getLastNode();
-		pointer.next = list.head;
+			this.head.prev = list.head;
+			list.head.next = this.head;
+			this.head = list.head;
 		}else{
 			this.head = list.head;
+			this.tail = list.tail;
 		}
 	}
 	// Deletes this.Node containing value from list 
 	remove(value, comparator = (a, b) => a===b){
-		if(comparator(this.head.value, value)){
-			this.head = this.head.next;
-			return 1;
-		}else{
-			let prev = this.getOneNodeBefore(value, comparator);
-			if(prev){
-				prev.next = prev.next.next;
+		if(this.head){
+			if(comparator(this.head.value, value)){
+				if(this.head.next){
+					this.head = this.head.next;
+					this.head.prev = null;
+				}else{
+					this.head = this.tail = null;
+				}
 				return 1;
 			}else{
+				let pointer = this.head,
+				found = false;
+				for(;pointer.next; pointer = pointer.next) {
+					if(comparator(pointer.value, value)) {
+						pointer.prev.next = pointer.next;
+						pointer.next.prev = pointer.prev;
+						found = true;
+						return 1;
+					}
+				}
+				
+				if(comparator(pointer.value, value)){
+					found = true;
+					pointer.next = null;
+					this.tail = pointer.prev;
+					pointer.prev.next = null;
+					return 1;
+				}
 				return 0;
 			}
-		}
-	}
-	// Returns this.Node before but one the value
-	getOneNodeBefore (value, comparator) {
-		let pointer = this.head,
-			prev = this.head,
-			found = false;
-		if (value) {
-			for(;pointer.next; prev = pointer, pointer = pointer.next) {
-				if(comparator(pointer.value, value)) {
-					found = true;
-					break;
-				}
-			}
 		}else{
-			prev = getLastButOneNode();
+			return 0;
 		}
-		if(comparator(pointer.value, value)){
-			found = true;
-		}
-		return found ? prev : null;
 	}
 	// Insert this.Node in the certain position or to the end if index greate of the collection length
 	insert (value, index) {
-		if(index === 0) {
-			let newNode = new this.Node(value);
-			newNode.next = this.head;
-			this.head = newNode;
-			
-			return 1;
+		if(this.isEmpty()){
+			this.tail = this.head = new this.Node(value);
+		}else{
+			if(index === 0) {
+				let newNode = new this.Node(value);
+				newNode.prev = this.tail;
+				this.tail.next = newNode;
+				this.tail = newNode;
+				
+				return 1;
+			}
+			let pointer = this.tail,
+				prevN = this.tail;
+			for (let i = 0; i < index && pointer; prevN = pointer, pointer = pointer.prev, i++) {
+				continue;
+			}
+			const newNode = new this.Node(value);
+			prevN.prev = newNode;
+			prevN.prev.next = prevN;
+			if(pointer){
+				prevN.prev.next = prevN;
+				prevN.prev.prev = pointer;
+				pointer.next = prevN.prev;
+			}else{
+				this.head = newNode;
+			}
 		}
-		let pointer = this.head,
-			prev = this.head,
-			i = 0;
-		for (i = 0; i !== index && pointer; prev = pointer, pointer = pointer.next, i++) {
-			continue;
-		}
-		prev.next = new this.Node(value);
-		prev.next.next = pointer;
 		return 1;
+	}
+	pop(){
+		let value = null;
+		
+		if(this.head){
+			value = this.head.value;
+			if(this.head.next){
+				this.head = this.head.next;
+				this.head.prev = null;
+			}else{
+				this.head = this.tail = null;
+			}
+		}
+		
+		return value;
 	}
 	// Adds this.Node to the head of the list
 	unshift (value) {
-		let newHead = new this.Node(value);
-		newHead.next = this.head;
-		this.head = newHead;
+		let newTail= new this.Node(value);
+		if(!this.isEmpty()){
+			this.tail.next = newTail;
+			newTail.prev= this.tail;
+			this.tail = newTail;
+		}else{
+			this.tail = this.head = newTail;
+		}
 		return 1;
 	}
 	// Takes off the first this.Node and returns its value
 	shift () {
-		let value = this.head.value;
-		this.head = this.head.next;
-		
+		let value = null;
+		if(!this.isEmpty()){
+			value = this.tail.value;
+			if(this.tail.prev){
+				this.tail = this.tail.prev;
+				this.tail.next = null;
+			}else{
+				this.tail = this.head = null;	
+			}
+		}
 		return value;
 	}
-	// Prints list in the console.log
-	// print(){
-		// if(this.head){
-			// let pointer = this.head;
-			// while(pointer.next){
-				// console.log(pointer.value);
-				// pointer = pointer.next;
-			// }
-			// console.log(pointer.value);
-		// } else {
-			// console.log('Empty List');
-		// }
-	// }
 	// Iterator
 	[Symbol.iterator](){
 		let current = { next: this.head };
@@ -113,9 +150,9 @@ module.exports = class List extends Stack{
 				if(current.next){
 					current = current.next;
 					return {
-							  done: false,
-							  value: current.value
-							}
+						done: false,
+						value: current.value
+					}
 				}else{
 					return {
 						done: true

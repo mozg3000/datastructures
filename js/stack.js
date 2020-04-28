@@ -1,9 +1,10 @@
 module.exports = class Stack {
 	constructor(value) {
 		this.Node = class {
-			constructor(invalue){
-				this.value = invalue;
+			constructor(value){
+				this.value = value;
 				this.next = null;
+				// this.prev = prev;
 			}
 		}
 		this.head = value ? new this.Node(value) : null;
@@ -11,76 +12,44 @@ module.exports = class Stack {
 	// Takes off last this.Node and returns value
 	pop() {
 		let value = null;
-		if(this.head){
-			if(this.head.next){
-				let prev = this.getLastButOneNode(),
-					value = prev.next.value;
-			}else{
-				value = this.head.value;
-				this.head = null;
-			}
+		if(!this.isEmpty()){
+			value = this.head.value;
+			this.head = this.head.next;
 		}
 		return value;
 	}
-	// Adds this.Node to collection
+	// Adds this.Node to the head of the collection
 	push(value){
-		if(!this.head){
-			this.head = new this.Node(value);
+		if(this.isEmpty()){
+			this._addHead(value);
 		}else{
-			this.getLastNode().next = new this.Node(value);
+			this._prepend(value);
 		}
 		return 1;
 	}
-	append(value){
-		this.findNodeToPush().next = new this.Node(value);
+	_prepend(value){
+		const tmp = this.head;
+		this.head = new this.Node(value);
+		this.head.next = tmp;
 	}
-	// Method to be use in inheritors clases to push nodes to the end
-	findNodeToPush(value){
-		return this.getLastNode();
-	}
-	// Returns last this.Node of the collection
-	getLastNode(){
-		let pointer = this.head;
-		for(; pointer.next; pointer = pointer.next){
-			continue;
-		}
-		return pointer;
-	}
-	// Returns last but one this.Node
-	getLastButOneNode() {
-		let pointer = this.head,
-			prev = this.head;
-		for(;pointer.next; prev = pointer, pointer = pointer.next) {
-			continue;
-		}
-		return prev;
-	}
-	// Find out length of the collection
-	length(){
-		let count = 0;
-		if(this.head){
-			count++;
-			for(let pointer = this.head; pointer.next; pointer = pointer.next){
-				count++;
-			}
-		}
-		return count;
+	_addHead(value){
+		this.head = new this.Node(value);
 	}
 	// Return true if collection empty
 	isEmpty(){
 		return this.head === null;
 	}
 	// Prints collection to the console.log
-	print(){
-		if(this.head){
-			let pointer = this.head;
-			while(pointer.next){
-				console.log(pointer.value);
-				pointer = pointer.next;
-			}
-			console.log(pointer.value);
-		} else {
-			console.log('Empty Collection');
-		}
-	}
+	// print(){
+		// if(this.head){
+			// let pointer = this.head;
+			// while(pointer.next){
+				// console.log(pointer.value);
+				// pointer = pointer.next;
+			// }
+			// console.log(pointer.value);
+		// } else {
+			// console.log('Empty Collection');
+		// }
+	// }
 }
