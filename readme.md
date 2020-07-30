@@ -115,7 +115,7 @@ Method | Description
 
 ## Изменения
 ### v. 0.1.2
-*  изменён файл Readme.md
+*  обновлён файл Readme.md
 * добавлен экспорт TemplateSentenceTree в index.js
 
 ### v. 0.1.1
