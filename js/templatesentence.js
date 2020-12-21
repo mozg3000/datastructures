@@ -1,5 +1,5 @@
 
-module.exports = class TemplateSentenceTree{
+module.exports = class TemplateSentence{
 	
 	static _extractData(expression){
 		let brackets = this._findBrackets(expression),

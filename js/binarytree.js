@@ -1,4 +1,3 @@
-// import this.Node from './this.Node';
 const List = require('./list.js');
 // BinaryTree with only unique values
 module.exports = class BinaryTree extends List{
