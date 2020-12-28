@@ -1,4 +1,3 @@
-const List = require('./list.js');
 module.exports = class DataProvider{
 	constructor(obj){
 		this.data = obj.data;
@@ -9,14 +8,24 @@ module.exports = class DataProvider{
 	// Iterator
 	[Symbol.iterator](){
 		this.filteredData = [...this.data];
-		let filteredData = this.filters.forEach(
-			(filter) => {
-				this.filteredData = this.filteredData.filter(filter);
-			}
-		);
-		this.sorters.forEach(
-			(sorter) => this.filteredData.sort(sorter)
-		);
+		if(this.filters){
+			let filteredData = this.filters.forEach(
+				(filter) => {
+					if(filter.on){
+						this.filteredData = this.filteredData.filter(filter.filter);
+					}
+				}
+			);
+		}
+		if(this.sorters){
+			this.sorters.forEach(
+					(sorter) => {
+						if(sorter.on){
+							this.filteredData.sort(sorter.sorter)
+					}
+				}
+			);
+		}
 		let current = this.filteredData[Symbol.iterator]();
 		const iterator = {
 			next(){

@@ -1,6 +1,6 @@
 {
   "name": "@mozg3000/datastructures",
-  "version": "0.2.2",
+  "version": "0.3.4",
   "description": "Common data structures",
   "main": "index.js",
   "scripts": {

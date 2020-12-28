@@ -5,6 +5,7 @@ const BinaryTree = require('./js/binarytree.js');
 const TemplateSentence= require('./js/templatesentence');
 const ExpressionTree = require('./js/expressiontree');
 const priorities = require('./js/priorities');
+const DataProvider = require('./js/dataprovider');
 
 module.exports = {
 	Stack, 
@@ -12,5 +13,6 @@ module.exports = {
 	List, 
 	TemplateSentence, 
 	ExpressionTree,
-	priorities
+	priorities,
+	DataProvider
 };
